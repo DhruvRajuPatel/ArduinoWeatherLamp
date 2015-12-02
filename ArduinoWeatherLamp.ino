@@ -56,7 +56,13 @@ void connectToWiFi() {
 
   cc3k.checkDHCP();
 }
+
 void loop() {
+ 
+  analogWrite(BLUE, 255 - 255);
+  analogWrite(RED, 255 - 0);
+  analogWrite(GREEN, 255 - 0);
+  
   TembooChoreo GetWeatherByAddressChoreo(client);
 
   GetWeatherByAddressChoreo.begin();
@@ -70,32 +76,39 @@ void loop() {
 
   GetWeatherByAddressChoreo.setChoreo("/Library/Yahoo/Weather/GetWeatherByAddress");
 
-  //GetWeatherByAddressChoreo.run();
+  GetWeatherByAddressChoreo.addOutputFilter("temperature", "/rss/channel/item/yweather:condition/@temp", "Response");
 
-  //while(GetWeatherByAddressChoreo.available()) {
-  //int c = GetWeatherByAddressChoreo.read();
-  int c = 56;
-  if (c < 55) {
-    analogWrite(BLUE, 255 - 255);
-    analogWrite(RED, 255 - 0);
-    analogWrite(GREEN, 255 - 0);
-  } 
-  if (c < 70) {
-    analogWrite(BLUE,255 - 51);
-    analogWrite(RED,255 - 255);
-    analogWrite(GREEN,255 - 153);
-  } 
-  if (c > 75) {
-    analogWrite(BLUE,255 - 0);
-    analogWrite(RED,255 - 255);
-    analogWrite(GREEN,255 - 0);
-  } 
-  //}
+  GetWeatherByAddressChoreo.run();
+
+  while(GetWeatherByAddressChoreo.available()) {
+
+    int c = GetWeatherByAddressChoreo.read();
+
+    if (c < 55) {
+      analogWrite(BLUE, 255 - 255);
+      analogWrite(RED, 255 - 0);
+      analogWrite(GREEN, 255 - 0);
+    } 
+
+    if (c < 70) {
+      analogWrite(BLUE,255);
+      analogWrite(RED,255-165);
+      analogWrite(GREEN,255-255);
+    } 
+
+    if (c > 75) {
+      analogWrite(BLUE,255 - 0);
+      analogWrite(RED,255 - 255);
+      analogWrite(GREEN,255 - 0);
+    } 
+  }
   GetWeatherByAddressChoreo.close();
-
 
   delay(5000);
 }
+
+
+
 
 
 

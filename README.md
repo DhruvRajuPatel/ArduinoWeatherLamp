@@ -1,4 +1,4 @@
-# ArduinoWeatherLamp
+# Arduino Weather Lamp
 Arduino Lamp which changes color depending on the weather outside. Uses Temboo web service to receive XML response with current weather information for a particular location. 
 Parse the information and depending on the weather the color will change (cold - dark blue, warm - orange, hot - red).
 
@@ -20,7 +20,7 @@ Acrylic Sheet Cube (sanded down to be frosted) aka Plexiglass ~$10
 
 Total: ~$60 
 
-Software:
+# Software:
 
 To run and successfully connect to a wireless network, you must install Arduino IDE 1.0.x (https://www.arduino.cc/en/Main/OldSoftwareReleases) as the updated IDE does not bode well with the older LinkSprite WiFi Shield. 
 Also, you must import the Arduino CC library (included in this repository). 
