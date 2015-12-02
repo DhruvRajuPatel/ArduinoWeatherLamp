@@ -28,8 +28,9 @@ Also, you must import the Arduino CC library (included in this repository).
 To run Temboo, you must import the library (included in this repository). I have a signed up for the free service and my credentials are located in the TembooAccount.h header file. You
 have a limited number of "free" API requests and you can log in my account to view the number of requests remaining. 
 
+Step-by-step guide: 
 
-
+https://imgur.com/a/VHiup
 
 
 
