@@ -39,18 +39,13 @@ void connectToWiFi() {
   status_t wifiStatus = STATUS_DISCONNECTED;
 
   while (wifiStatus != STATUS_CONNECTED) {
-    Serial.print("WiFi:");
 
     if (cc3k.begin()) {
       if (cc3k.connectToAP(WIFI_SSID, WPA_PASSWORD, WLAN_SEC_WPA2)) {
         wifiStatus = cc3k.getStatus();
       }
     }
-
-    if (wifiStatus == STATUS_CONNECTED) {
-      Serial.println("Connected");
-    }
-
+    
     delay(5000);
   }
 
@@ -58,11 +53,6 @@ void connectToWiFi() {
 }
 
 void loop() {
- 
-  analogWrite(BLUE, 255 - 255);
-  analogWrite(RED, 255 - 0);
-  analogWrite(GREEN, 255 - 0);
-  
   TembooChoreo GetWeatherByAddressChoreo(client);
 
   GetWeatherByAddressChoreo.begin();
@@ -82,30 +72,32 @@ void loop() {
 
   while(GetWeatherByAddressChoreo.available()) {
 
-    int c = GetWeatherByAddressChoreo.read();
+    int temp = GetWeatherByAddressChoreo.read();
 
-    if (c < 55) {
+    if (temp < 55) {
       analogWrite(BLUE, 255 - 255);
       analogWrite(RED, 255 - 0);
       analogWrite(GREEN, 255 - 0);
     } 
-
-    if (c < 70) {
-      analogWrite(BLUE,255);
-      analogWrite(RED,255-165);
-      analogWrite(GREEN,255-255);
+    else if (temp <= 70 && temp > 55) {
+      analogWrite(BLUE,255 - 0);
+      analogWrite(RED,255 - 255);
+      analogWrite(GREEN,255 - 255);
     } 
-
-    if (c > 75) {
+    else if (temp > 70) {
       analogWrite(BLUE,255 - 0);
       analogWrite(RED,255 - 255);
       analogWrite(GREEN,255 - 0);
     } 
+
+
   }
   GetWeatherByAddressChoreo.close();
 
   delay(5000);
 }
+
+
 
 
 
