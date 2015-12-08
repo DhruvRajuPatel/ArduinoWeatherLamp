@@ -32,6 +32,10 @@ have a limited number of "free" API requests and you can log in my account to vi
 
 https://imgur.com/a/VHiup
 
+# Video Demonstration: 
+
+https://youtu.be/BA92p7novmQ
+
 
 
 
